@@ -1,0 +1,27 @@
+360 PHARMACY v5 - ONE SUPABASE AUTH LOGIN
+
+READ README.md for exact setup and limitations.
+
+Do not run both SQL files.
+  - Brand-new empty Supabase project: supabase/CREATE_NEW_DATABASE.sql
+  - Existing empty v4 Pharmacy360 schema: supabase/UPGRADE_EMPTY_V4_TO_AUTH.sql
+
+Supabase Auth Dashboard:
+  Confirm email ON
+  Confirmation email template includes {{ .Token }} for customer OTP
+  Reset password email template includes {{ .ConfirmationURL }}; no invite template needed for new staff
+  Site URL / Redirect URL include http://127.0.0.1:8000/login or your deployment URL
+  Configure custom SMTP for sending real account emails
+
+Copy server/.env.example -> server/.env and fill DATABASE_URL, SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY, SUPABASE_SERVICE_ROLE_KEY, PUBLIC_SITE_URL,
+APP_SECRET and ADMIN_SETUP_TOKEN. Never put secret keys in client code.
+
+Windows:
+  INSTALL_DEPENDENCIES.bat
+  START_SYSTEM.bat
+  Open http://127.0.0.1:8000/login
+
+Create the first Admin privately through Supabase Authentication > Users; assign its admin role in public.profiles.
+Admin creates staff directly under Staff Accounts with role, email and initial password. No invitation email is sent; staff sign in on the shared login page.
+No role selection on login, no separate staff login page, no demo accounts.

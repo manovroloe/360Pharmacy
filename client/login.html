@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="360 Pharmacy secure login, customer registration and administrator-created staff accounts.">
+  <title>Sign In | 360 Pharmacy</title>
+  <link rel="icon" href="/assets/brand-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/style.css?v=unified5">
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script defer src="/scripts/config.js?v=unified5"></script>
+  <script defer src="/scripts/api.js?v=unified5"></script>
+  <script defer src="/scripts/login.js?v=staff-admin-fix-20261111"></script>
+</head>
+<body class="unified-login">
+  <div class="toast-area" id="toastArea" role="status" aria-live="polite"></div>
+  <main class="login-layout">
+    <section class="login-feature" aria-label="360 Pharmacy services">
+      <a class="brand login-brand" href="/"><img src="/assets/brand-mark.svg" alt=""><span><strong>ThreeSixty</strong><small>PHARMACY</small></span></a>
+      <div class="login-feature-copy"><span class="login-eyebrow"><i data-lucide="shield-check"></i> SECURE PHARMACY ACCESS</span>
+        <h1>One place to sign in. <em>The right workspace for you.</em></h1>
+        <p>Customers shop and track orders. Staff members open their assigned pharmacy workspaces. All accounts use the same secure Supabase sign-in.</p>
+        <div class="login-benefits"><div><i data-lucide="shopping-bag"></i><span>Order and track medicines</span></div><div><i data-lucide="stethoscope"></i><span>Professional prescription review</span></div><div><i data-lucide="boxes"></i><span>Stock and delivery coordination</span></div></div>
+      </div>
+      <div class="login-feature-foot"><span class="login-accent-dot"></span> Green care · Gold confidence · One pharmacy</div>
+    </section>
+    <section class="login-form-side">
+      <div class="login-form-wrap">
+        <div class="login-topline"><a href="/" class="login-back"><i data-lucide="arrow-left"></i> Back to pharmacy</a><span class="login-shield"><i data-lucide="lock-keyhole"></i> Secure sign in</span></div>
+        <div class="login-identity"><img src="/assets/brand-mark.svg" alt=""><span><strong>360 Pharmacy</strong><small>ONE ACCOUNT · ROLE-BASED ACCESS</small></span></div>
+        <div class="login-heading"><span class="section-kicker" id="modeEyebrow">WELCOME BACK</span><h2 id="modeTitle">Sign in to your account</h2><p id="modeDescription">Use your email and password. We'll open the right dashboard automatically.</p></div>
+        <div class="login-alert hidden" id="loginAlert" role="alert"></div>
+        <nav class="login-tabs" aria-label="Account options" id="loginTabs"><button type="button" class="active" data-mode="signin">Sign In</button><button type="button" data-mode="signup">Create Account</button></nav>
+
+        <form id="signinForm" class="login-form" data-panel="signin">
+          <label>Email address<input name="email" type="email" autocomplete="email" placeholder="name@example.com" required></label>
+          <label>Password<div class="password-field"><input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Your password" required><button type="button" class="password-toggle" data-toggle="loginPassword" aria-label="Show or hide password"><i data-lucide="eye"></i></button></div></label>
+          <button type="button" class="auth-text-link text-right" data-mode="forgot">Forgot password?</button>
+          <button class="primary-btn wide login-submit" type="submit"><i data-lucide="log-in"></i> Sign In</button>
+          <p class="login-form-note">Your permissions are assigned automatically. You never choose a staff role during login.</p>
+        </form>
+
+        <form id="signupForm" class="login-form hidden" data-panel="signup">
+          <p class="login-helper">Customer accounts only. Pharmacy employees receive credentials created by an administrator.</p>
+          <label>Full name<input name="full_name" maxlength="160" autocomplete="name" placeholder="Your full name" required></label>
+          <label>Email address<input name="email" type="email" autocomplete="email" placeholder="name@example.com" required></label>
+          <label>Password<input name="password" type="password" minlength="8" maxlength="128" autocomplete="new-password" placeholder="At least 8 characters" required></label>
+          <label>Confirm password<input name="confirm_password" type="password" minlength="8" maxlength="128" autocomplete="new-password" placeholder="Repeat your password" required></label>
+          <button class="primary-btn wide login-submit" type="submit"><i data-lucide="user-round-plus"></i> Create Customer Account</button>
+        </form>
+
+        <form id="verifyForm" class="login-form hidden" data-panel="verify">
+          <div class="verify-message"><i data-lucide="mail-check"></i><span>We sent a verification code to <strong id="verifyAddress">your email address</strong>.</span></div>
+          <label>Email address<input name="email" type="email" autocomplete="email" placeholder="name@example.com" required></label>
+          <label>Verification code<input name="token" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,8}" maxlength="8" minlength="6" placeholder="6 or 8 digit code" required></label>
+          <button class="primary-btn wide login-submit" type="submit"><i data-lucide="badge-check"></i> Verify Email</button>
+          <div class="login-links"><button class="auth-text-link" id="resendCode" type="button">Resend code</button><button class="auth-text-link" data-mode="signin" type="button">Back to sign in</button></div>
+        </form>
+
+        <form id="forgotForm" class="login-form hidden" data-panel="forgot">
+          <p class="login-helper">We will email a secure recovery link. This also works for staff members who need to set a new password.</p>
+          <label>Account email<input name="email" type="email" autocomplete="email" placeholder="name@example.com" required></label>
+          <button type="submit" class="primary-btn wide login-submit"><i data-lucide="mail"></i> Send Reset Link</button>
+          <button class="auth-text-link" data-mode="signin" type="button">Back to sign in</button>
+        </form>
+
+        <form id="newPasswordForm" class="login-form hidden" data-panel="newpass">
+          <p class="login-helper" id="passwordNotice">Choose your new password to finish setting up your account.</p>
+          <label>New password<input name="new_password" minlength="8" maxlength="128" autocomplete="new-password" type="password" required></label>
+          <label>Confirm new password<input name="confirm_password" minlength="8" maxlength="128" autocomplete="new-password" type="password" required></label>
+          <button type="submit" class="primary-btn wide login-submit"><i data-lucide="key-round"></i> Save Password & Continue</button>
+        </form>
+        <div class="login-footer"><span>Protected by Supabase Authentication</span></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

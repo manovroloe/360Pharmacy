@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">ThreeSixty Pharmacy concept mark</title>
+  <desc id="desc">A green circular pharmacy cross with a capsule motif.</desc>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b7a3b"/>
+      <stop offset="1" stop-color="#25a95b"/>
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="58" fill="#f8fff9" stroke="#dcefe2" stroke-width="5"/>
+  <circle cx="64" cy="64" r="45" fill="url(#g)"/>
+  <rect x="56" y="30" width="16" height="68" rx="8" fill="#fff"/>
+  <rect x="30" y="56" width="68" height="16" rx="8" fill="#fff"/>
+  <g transform="rotate(-35 64 64)">
+    <rect x="45" y="50" width="38" height="28" rx="14" fill="#f6c64c" stroke="#fff" stroke-width="4"/>
+    <path d="M64 50v28" stroke="#fff" stroke-width="4"/>
+  </g>
+</svg>

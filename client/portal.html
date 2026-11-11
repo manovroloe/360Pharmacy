@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>360 Pharmacy · Workspace</title>
+  <link rel="icon" href="/assets/brand-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/style.css?v=p360-feature-20261112">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="/scripts/config.js?v=workflow8" defer></script>
+  <script src="/scripts/api.js?v=p360-feature-20261112" defer></script>
+  <script src="/scripts/portal.js?v=p360-feature-20261112" defer></script>
+</head>
+<body class="portal-body">
+  <div id="toastArea" class="toast-area"></div>
+
+  <section id="workspaceLoading" class="portal-gate" aria-live="polite">
+    <div class="gate-card" style="text-align:center">
+      <img src="/assets/brand-mark.svg" alt="360 Pharmacy" style="width:64px;margin:0 auto 14px">
+      <span class="section-kicker">SECURE WORKSPACE</span>
+      <h1>Opening your workspace</h1>
+      <p>Checking your session and assigned pharmacy role...</p>
+    </div>
+  </section>
+
+  <div class="portal-shell hidden" id="portalShell">
+    <aside class="portal-sidebar">
+      <div class="portal-brand"><img src="/assets/brand-mark.svg" alt=""><div><strong>360 Pharmacy</strong><small id="roleLabel">Operations</small></div></div>
+      <nav id="portalNav"></nav>
+      <div class="sidebar-foot"><div class="staff-chip"><span id="staffInitial">S</span><div><strong id="staffName">Staff</strong><small id="staffEmail">—</small></div></div><button class="outline-btn wide" id="portalLogout"><i data-lucide="log-out"></i>Logout</button></div>
+    </aside>
+
+    <main class="portal-main">
+      <header class="portal-topbar"><div><span class="section-kicker" id="pageKicker">OPERATIONS</span><h1 id="pageTitle">Dashboard</h1></div><div class="topbar-actions"><button class="icon-btn notification-toggle" id="openNotifications" type="button" aria-label="Staff notifications" title="Staff notifications"><i data-lucide="bell"></i><span class="notification-dot hidden" id="notificationCount">0</span></button><a href="/" class="outline-btn"><i data-lucide="store"></i>Customer site</a><button class="icon-btn" id="refreshPortal"><i data-lucide="refresh-cw"></i></button></div></header>
+      <div id="portalContent" class="portal-content"></div>
+    </main>
+  </div>
+
+  <div class="modal" id="portalModal"><div class="modal-card modal-wide"><button class="modal-close" data-close="portalModal"><i data-lucide="x"></i></button><div id="portalModalBody"></div></div></div>
+</body>
+</html>

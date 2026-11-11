@@ -1,0 +1,8 @@
+360 Pharmacy v5 validation requirements:
+- Python and JS source syntax
+- Supabase Auth HTTP adapter mock tests for login, verification, invitation and recovery
+- Route checks for /login, /workspace, and access restrictions
+- Fresh/upgrade SQL structural checks
+- End-to-end Supabase email, storage, PostgreSQL and hosted sessions must be tested with project credentials
+- Cash payments are not online payments; PayMongo not live
+- GPS works only with browser permission on open HTTPS/localhost page

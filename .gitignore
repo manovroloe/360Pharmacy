@@ -1,0 +1,28 @@
+server/.env
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+
+# Private credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node.js
+node_modules/
+
+# Local files
+*.log
+.DS_Store

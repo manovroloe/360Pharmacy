@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="360 Pharmacy digital storefront for medicines, pharmacist support, pickup and delivery.">
+  <title>360 Pharmacy</title>
+  <link rel="icon" href="/assets/brand-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/style.css?v=p360-feature-20261112">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="/scripts/config.js?v=workflow8" defer></script>
+  <script src="/scripts/api.js?v=p360-feature-20261112" defer></script>
+  <script src="/scripts/app.js?v=p360-feature-20261112" defer></script>
+</head>
+<body class="storefront">
+  <div id="toastArea" class="toast-area"></div>
+
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <span><i data-lucide="shield-check"></i> Pharmacist-reviewed medicine support</span>
+      
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="360 Pharmacy home">
+        <img src="/assets/brand-mark.svg" alt="">
+        <span><strong>ThreeSixty</strong><small>PHARMACY</small></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#services">Services</a>
+        <a href="#medicines">Medicines</a>
+        <a href="#prescription">Prescription</a>
+        <a href="#branches">Branches</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="account-button" id="accountBtn"><i data-lucide="user-round"></i><span id="accountText">Login</span></button>
+        <button class="cart-button" id="cartOpenBtn"><i data-lucide="shopping-bag"></i><span>Basket</span><b id="cartCount">0</b></button>
+        <button class="icon-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Quick menu">
+      <a href="#services">Services</a>
+      <a href="#medicines">Medicines</a>
+      <a href="#prescription">Prescription</a>
+      <a href="#branches">Branches</a>
+      <a href="/login" class="staff-portal-menu-link"><i data-lucide="log-in"></i><span>Log in / Sign up</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> Traditional care, digitally convenient</div>
+          <h1>Medicines and pharmacist support, <em>closer to home.</em></h1>
+          <p>Browse medicines without an account. When you are ready to order, upload a prescription, pay, save favorites, or ask a pharmacist, sign in securely with your email account.</p>
+          <div class="hero-search">
+            <i data-lucide="search"></i>
+            <input id="heroSearch" type="search" placeholder="Search medicine, generic name, brand, or use">
+            <a href="#medicines">Search</a>
+          </div>
+          <div class="trust-row">
+            <span><i data-lucide="badge-check"></i> Pharmacist verification</span>
+            <span><i data-lucide="store"></i> Admin-set pickup points</span>
+            <span><i data-lucide="truck"></i> Door-to-door ready</span>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="hero-card main">
+            <span class="floating-pill p1"></span><span class="floating-pill p2"></span>
+            <i data-lucide="heart-pulse"></i>
+            <h2>Care that moves with you.</h2>
+            <p>Shop OTC essentials, submit prescriptions for review, and track fulfillment from the pharmacy to your door.</p>
+          </div>
+          <div class="mini-card c1"><i data-lucide="message-circle-heart"></i><strong>Ask a pharmacist</strong><span>Medicine guidance & Rx questions</span></div>
+          <div class="mini-card c2"><i data-lucide="package-check"></i><strong>Track orders</strong><span>Step-by-step shipping timeline</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-services" id="services">
+      <div class="container">
+        <div class="section-heading compact-heading">
+          <div><span class="section-kicker">SERVICES</span><h2>Pharmacy help beyond the counter.</h2></div>
+        </div>
+        <div class="service-grid">
+          <button class="service-card" id="askPharmacistBtn"><span><i data-lucide="messages-square"></i></span><div><strong>Ask a Pharmacist</strong><small>Questions about symptoms, OTC options, or an Rx</small></div><i data-lucide="arrow-up-right"></i></button>
+          <button class="service-card" id="serviceRxBtn"><span><i data-lucide="file-heart"></i></span><div><strong>Prescription Review</strong><small>Upload a readable prescription for verification</small></div><i data-lucide="arrow-up-right"></i></button>
+          <button class="service-card" id="trackOrderBtn"><span><i data-lucide="route"></i></span><div><strong>Track Shipping</strong><small>See packing, courier, transit, and delivery progress</small></div><i data-lucide="arrow-up-right"></i></button>
+          <button class="service-card" onclick="document.querySelector('#branches').scrollIntoView({behavior:'smooth'})"><span><i data-lucide="map-pin-house"></i></span><div><strong>Pickup Locations</strong><small>Choose only addresses configured by the admin</small></div><i data-lucide="arrow-up-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="shop-section" id="medicines">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">MEDICINES</span>
+            <h2>Find what you need, then let the right professional step in.</h2>
+            <p id="catalogMessage">Loading the live catalog from Supabase PostgreSQL…</p>
+          </div>
+          <span class="data-mode" id="dataMode"><i data-lucide="loader-circle"></i> Connecting</span>
+        </div>
+        <div class="catalog-search"><i data-lucide="search"></i><input id="medicineSearch" type="search" placeholder="Search medicines"></div>
+        <div class="category-scroll" id="categoryChips"></div>
+        <div class="shop-toolbar"><strong id="productCount">0 medicines</strong><button class="outline-btn" id="favoritesBtn"><i data-lucide="heart"></i>Saved medicines</button></div>
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </section>
+
+    <section class="rx-section" id="prescription">
+      <div class="container rx-grid">
+        <div class="rx-copy">
+          <span class="section-kicker">PRESCRIPTION</span>
+          <h2>Send it first. Let the pharmacist verify it.</h2>
+          <p>Prescription medicines stay under pharmacist control. Uploading does not automatically approve a medicine—the pharmacist can approve, reject, or ask you for clearer information.</p>
+          <div class="rx-points"><span><i data-lucide="lock-keyhole"></i> Private file storage</span><span><i data-lucide="stethoscope"></i> Pharmacist decision</span><span><i data-lucide="message-circle"></i> Clarification support</span></div>
+          <button class="primary-btn" id="uploadRxBtn"><i data-lucide="file-up"></i>Upload prescription</button>
+        </div>
+        <div class="rx-visual">
+          <div class="paper">
+            <div class="paper-head"><div class="rx-symbol">Rx</div><span>Prescription Review</span></div>
+            <div class="paper-line wide"></div><div class="paper-line"></div><div class="paper-line mid"></div>
+            <div class="review-seal"><i data-lucide="badge-check"></i><span>For pharmacist verification</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="deals-section" id="deals">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">SAVE MORE</span><h2>Hot Deals, Sales & Promo Deals</h2><p>Discounts here are controlled by the head/admin and are applied by the backend during checkout—not by hardcoded browser prices.</p></div>
+        </div>
+        <div class="deal-tabs" id="dealTabs">
+          <button class="active" data-kind="hot_deal">Hot Deals</button>
+          <button data-kind="sale">Sales</button>
+          <button data-kind="promo">Promo Deals</button>
+        </div>
+        <div class="deal-grid" id="dealGrid"></div>
+      </div>
+    </section>
+
+    <section class="branches-section" id="branches">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">BRANCHES</span><h2>Pickup addresses configured by the pharmacy.</h2><p>For delivery, customers use a saved door-to-door address. The maps integration point can later geocode and optimize branch assignment.</p></div>
+        </div>
+        <div class="branch-grid" id="branchGrid"></div>
+      </div>
+    </section>
+
+    <section class="partners-section" id="partners">
+      <div class="container">
+        <div class="section-heading compact-heading"><div><span class="section-kicker">PARTNER MANUFACTURERS</span><h2>Brands and manufacturers carried by the pharmacy.</h2></div></div>
+        <div class="partner-grid" id="partnerGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="brand footer-brand"><img src="/assets/brand-mark.svg" alt=""><span><strong>ThreeSixty</strong><small>PHARMACY</small></span></div>
+      <p>Hybrid pharmacy storefront connecting traditional pharmacist service with online ordering, prescription review, pickup, and delivery workflows.</p>
+      <div><strong>Customer</strong><a href="#services">Services</a><a href="#medicines">Medicines</a><a href="#prescription">Prescription</a><a href="#branches">Branches</a></div>
+      <div><strong>Care</strong><span>Pharmacist-reviewed prescriptions</span><span>Private customer address book</span><span>Order tracking timeline</span></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 360 Pharmacy System</span><span>Supabase PostgreSQL + Python academic business system</span></div>
+  </footer>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-head"><div><span>Your order</span><h2>Medicine basket</h2></div><button class="icon-btn" id="cartCloseBtn"><i data-lucide="x"></i></button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-summary"><div><span>Estimated subtotal</span><strong id="cartSubtotal">₱0.00</strong></div><small>Live promotions are revalidated by Python during checkout.</small><button class="primary-btn wide" id="checkoutBtn">Continue to checkout <i data-lucide="arrow-right"></i></button></div>
+  </aside>
+
+  <!-- Customer account -->
+  <div class="modal account-side-modal" id="accountModal" aria-hidden="true">
+    <div class="modal-card modal-wide account-side-panel">
+      <button class="modal-close" data-close="accountModal"><i data-lucide="x"></i></button>
+      <div class="modal-heading"><span class="section-kicker">MY ACCOUNT</span><h2 id="accountName">Customer</h2><p id="accountEmail"></p></div>
+      <div class="account-tabs"><button class="active" data-account-tab="orders">Orders</button><button data-account-tab="favorites">Saved</button><button data-account-tab="prescriptions">Prescriptions</button><button data-account-tab="consultations">Pharmacist Support</button><button data-account-tab="addresses">Addresses</button></div>
+      <div id="accountPanel" class="account-panel"></div>
+      <div class="modal-actions"><button class="outline-btn logout-danger-text" id="logoutBtn"><i data-lucide="log-out"></i>Logout</button></div>
+    </div>
+  </div>
+
+  <!-- Prescription upload -->
+  <div class="modal" id="prescriptionModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" data-close="prescriptionModal"><i data-lucide="x"></i></button>
+      <div class="modal-heading"><span class="section-kicker">PRESCRIPTION</span><h2>Submit for pharmacist review</h2><p>Select the prescription medicine and attach a clear image or PDF.</p></div>
+      <form id="prescriptionForm" class="form-stack">
+        <label>Medicine<select name="product_id" id="rxProductSelect" required></select></label>
+        <label class="file-drop">Prescription file<input name="file" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required><span><i data-lucide="upload-cloud"></i> JPG, PNG, WEBP, or PDF · max 10 MB</span></label>
+        <button class="primary-btn wide" type="submit">Send for review</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Pharmacist support -->
+  <div class="modal" id="consultModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" data-close="consultModal"><i data-lucide="x"></i></button>
+      <div class="modal-heading"><span class="section-kicker">PHARMACIST SUPPORT</span><h2>Ask about your medicine or concern</h2><p>Describe your concern clearly. This is pharmacist support, not an emergency service.</p></div>
+      <form id="consultForm" class="form-stack">
+        <label>Subject<input name="subject" required placeholder="Example: Question about cough medicine"></label>
+        <label>Related medicine (optional)<select name="product_id" id="consultProductSelect"></select></label>
+        <label>Your message<textarea name="message" rows="5" required placeholder="Describe what you are confused about, symptoms relevant to an OTC inquiry, or a prescription question."></textarea></label>
+        <button class="primary-btn wide" type="submit">Send to pharmacist</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Checkout -->
+  <div class="modal" id="checkoutModal" aria-hidden="true">
+    <div class="modal-card modal-wide checkout-modal">
+      <button class="modal-close" data-close="checkoutModal"><i data-lucide="x"></i></button>
+      <div class="modal-heading"><span class="section-kicker">CHECKOUT</span><h2>Pickup or delivery</h2></div>
+      <form id="checkoutForm">
+        <div class="fulfillment-tabs"><button type="button" class="active" data-fulfillment="pickup"><i data-lucide="store"></i>Pickup</button><button type="button" data-fulfillment="delivery"><i data-lucide="truck"></i>Delivery</button></div>
+        <input type="hidden" name="fulfillment" value="pickup">
+        <section class="checkout-block active" id="pickupBlock"><h3>Choose pickup address</h3><div id="pickupChoices" class="choice-list"></div></section>
+        <section class="checkout-block" id="deliveryBlock"><div class="block-head"><h3>Delivery address</h3><button type="button" class="text-btn" id="addAddressBtn"><i data-lucide="plus"></i>Add address</button></div><div id="addressChoices" class="choice-list"></div></section>
+        <section class="checkout-block always"><h3>Payment</h3><div class="payment-grid" id="paymentChoices"></div></section>
+        <label>Order note (optional)<textarea name="notes" rows="2" placeholder="Delivery or pickup note"></textarea></label>
+        <div class="checkout-total"><span>Estimated total</span><strong id="checkoutTotal">₱0.00</strong></div>
+        <button class="primary-btn wide" type="submit">Place order securely</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Shopee/TikTok style address book form -->
+  <div class="modal nested-modal" id="addressModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" data-close="addressModal"><i data-lucide="x"></i></button>
+      <div class="modal-heading"><span class="section-kicker">DELIVERY ADDRESS</span><h2>Add delivery address</h2></div>
+      <form id="addressForm" class="form-stack">
+        <div class="form-grid two"><label>Recipient name<input name="recipient_name" required></label><label>Mobile number<input name="recipient_phone" required></label></div>
+        <div class="form-grid two"><label>Region<select id="addressRegion" required><option value="">Select region</option></select></label><label>Province<select name="province" id="addressProvince" required disabled><option value="">Select province</option></select></label></div>
+        <div class="form-grid two"><label>City / Municipality<select name="city" id="addressCity" required disabled><option value="">Select city</option></select></label><label>Barangay<select name="barangay" id="addressBarangay" required disabled><option value="">Select barangay</option></select></label></div>
+        <label>Postal code (optional)<input name="postal_code" inputmode="numeric" maxlength="12"></label>
+        <label>House no. / Street / Subdivision<input name="street_address" required></label>
+        <label>Landmark (optional)<input name="landmark" placeholder="Near school, gate color, building name, etc."></label>
+        <div class="form-grid two"><label>Address label<select name="label"><option>Home</option><option>Work</option><option>School</option><option>Other</option></select></label><label class="check-row"><input type="checkbox" name="is_default">Set as default address</label></div>
+        <button class="primary-btn wide" type="submit">Save address</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Track Shipping from Services: Orders only, no logout or account menus -->
+  <div class="modal" id="trackOrdersModal" aria-hidden="true">
+    <div class="modal-card modal-wide">
+      <button class="modal-close" data-close="trackOrdersModal"><i data-lucide="x"></i></button>
+      <div class="modal-heading"><span class="section-kicker">TRACK SHIPPING</span><h2>Orders</h2><p>Select an order to view its current pickup or delivery progress.</p></div>
+      <div class="account-tabs track-only-tabs"><button class="active">Orders</button></div>
+      <div id="trackOrdersPanel" class="account-panel"></div>
+    </div>
+  </div>
+
+  <!-- Tracking -->
+  <div class="modal" id="trackingModal" aria-hidden="true">
+    <div class="modal-card modal-wide">
+      <button class="modal-close" data-close="trackingModal"><i data-lucide="x"></i></button>
+      <div class="modal-heading"><span class="section-kicker">TRACK SHIPPING</span><h2 id="trackingTitle">Order progress</h2></div>
+      <div id="trackingBody"></div>
+    </div>
+  </div>
+</body>
+</html>
